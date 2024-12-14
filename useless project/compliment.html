@@ -1,0 +1,74 @@
+<!-- compliment.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Give a Compliment</title>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(to bottom right, #3a1c71, #d76d77, #ffaf7b);
+            color: #fff;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        button:hover {
+            background: #45a049;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Give the Dustbin a Compliment</h1>
+        <p>The dustbin loves to be appreciated! Write something nice below.</p>
+        <textarea placeholder="Your compliment..."></textarea><br>
+        <button onclick="nextTask()">Submit Compliment</button>
+    </div>
+
+    <script>
+        function nextTask() {
+            localStorage.setItem('complimentCompleted', 'true');
+            alert('Thank you for the kind words!');
+            window.location.href = "tasks.html";
+        }
+    </script>
+</body>
+</html>

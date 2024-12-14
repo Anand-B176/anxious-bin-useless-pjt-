@@ -1,0 +1,86 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anxious Dustbin</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(to bottom right, #3a1c71, #d76d77, #ffaf7b);
+            color: #fff;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .button {
+            font-size: 1.5rem;
+            padding: 15px 30px;
+            background: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .button:hover {
+            background: #45a049;
+            transform: scale(1.1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Anxious Dustbin Project</h1>
+        <p>The Anxious Dustbin needs your help! Complete the tasks below to encourage it to open its lid.</p>
+        <button class="button" onclick="redirectToTasks()">Start the Challenge</button>
+    </div>
+
+    <script>
+        function redirectToTasks() {
+            // Reset tasks on page load
+            localStorage.setItem('complimentCompleted', 'false');
+            localStorage.setItem('recycleCompleted', 'false');
+            window.location.href = "tasks.html";
+        }
+    </script>
+</body>
+</html>

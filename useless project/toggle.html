@@ -1,0 +1,117 @@
+<!-- toggle.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ESP32 LED Control</title>
+</head>
+<style>
+  body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: linear-gradient(to bottom right, #3a1c71, #d76d77, #ffaf7b);
+      color: #fff;
+      text-align: center;
+  }
+
+  .container {
+      max-width: 1000px;
+      padding: 50px;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 15px;
+  }
+
+  button {
+      padding: 10px 20px;
+      background: #ff5733;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.3s, background 0.3s;
+      position: center;
+  }
+
+  button:hover {
+      background: #ff451a;
+      transform: scale(1.1);
+  }
+</style>
+<body>
+  <div class="container">
+    <h1>Final Task</h1>
+    <p>Try to click the "Open" button!</p>
+    <button class="toggle" id="toggleButton" onclick="toggleLED()">Open</button>
+</div>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+  <script>
+    // Replace with your Firebase project configuration
+    const firebaseConfig = {
+  apiKey: "AIzaSyAFTdCqJtc8AmO9e8_aIFAv5FN8f0RShH8",
+  authDomain: "useless-dustbin.firebaseapp.com",
+  databaseURL: "https://useless-dustbin-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "useless-dustbin",
+  storageBucket: "useless-dustbin.firebasestorage.app",
+  messagingSenderId: "922678622875",
+  appId: "1:922678622875:web:04eae93d7db14bf5f9643e"
+};
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    // Reference to the Realtime Database
+    const database = firebase.database();
+
+    const toggleButton = document.getElementById('toggleButton');
+        // let startTime;
+
+        // function moveButton() {
+        //     const x = Math.random() * (window.innerWidth - 100);
+        //     const y = Math.random() * (window.innerHeight - 50);
+        //     toggleButton.style.position = 'absolute';
+        //     toggleButton.style.left = ${x}px;
+        //     toggleButton.style.top = ${y}px;
+        // }
+
+        // toggleButton.addEventListener('mouseover', () => {
+        //     if (!startTime) {
+        //         startTime = new Date().getTime();
+        //     }
+
+        //     if (new Date().getTime() - startTime < 5000) {
+        //         moveButton();
+        //     }
+        // });
+
+    function toggleLED() {
+      // Get the current state of the LED
+      database.ref('ledState').once('value', (snapshot) => {
+        const currentState = snapshot.val();
+
+       if(currentState == 0){
+        newState = 1;
+       }
+       else{
+        newState = 0;
+       }
+
+        // Update the database
+        database.ref('ledState').set(newState);
+        alert('You got the button!');
+            window.location.href = 'complete.html';
+      });
+
+      
+    }
+  </script>
+</body>
+</html>
+

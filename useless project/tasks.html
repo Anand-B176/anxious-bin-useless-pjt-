@@ -1,0 +1,116 @@
+<!-- tasks.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete the Tasks</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(to bottom right, #3a1c71, #d76d77, #ffaf7b);
+            color: #fff;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            padding: 30px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .task {
+            font-size: 1.5rem;
+            padding: 15px 30px;
+            background: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 10px 0;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .task.locked {
+            background: #888;
+            cursor: not-allowed;
+        }
+
+        .task:hover:not(.locked) {
+            background: #45a049;
+            transform: scale(1.1);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Complete the Tasks</h1>
+        <p>Help the dustbin by completing these tasks. Click on a task to get started!</p>
+        <button id="complimentTask" class="task" onclick="startTask('compliment.html')">Give a Compliment</button>
+        <button id="recycleTask" class="task locked" onclick="startTask('recycle.html')">Promise to Recycle</button>
+        <button id="toggleTask" class="task locked" onclick="startTask('toggle.html')">Now you can open the Lid</button>
+    </div>
+
+    <script>
+        function updateTaskButtons() {
+            const complimentCompleted = localStorage.getItem('complimentCompleted') === 'true';
+            const recycleCompleted = localStorage.getItem('recycleCompleted') === 'true';
+
+            if (complimentCompleted) {
+                document.getElementById('recycleTask').classList.remove('locked');
+            } else {
+                document.getElementById('recycleTask').classList.add('locked');
+            }
+
+            if (complimentCompleted && recycleCompleted) {
+                document.getElementById('toggleTask').classList.remove('locked');
+            } else {
+                document.getElementById('toggleTask').classList.add('locked');
+            }
+        }
+
+        function startTask(page) {
+            if (page === 'compliment.html') {
+                window.location.href = page;
+            } else if (page === 'recycle.html' && localStorage.getItem('complimentCompleted') === 'true') {
+                window.location.href = page;
+            } else if (page === 'toggle.html' && localStorage.getItem('recycleCompleted') === 'true') {
+                window.location.href = page;
+            } else {
+                alert('Please complete the previous tasks first!');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', updateTaskButtons);
+    </script>
+</body>
+</html>
